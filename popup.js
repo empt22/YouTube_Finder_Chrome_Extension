@@ -1,5 +1,5 @@
 console.clear
-console.log('This is a popup from EL - 20241206!')
+console.log('This is a popup from EL - 20241208!')
 
 console.log("comment outside searchWord function :)") /* does print */
 
