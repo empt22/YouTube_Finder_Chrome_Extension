@@ -44,3 +44,19 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 
 )
 
+/**Heroku app python */
+/*
+document.getElementById('process-button').addEventListener('click', async () => {
+    try {
+        const response = await fetch('https://your-app-name.herokuapp.com/hello', {
+            method: 'GET',
+        });
+
+        const result = await response.json();
+        document.getElementById('result').textContent = result.message;
+    } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('result').textContent = 'Error connecting to server';
+    }
+});
+*/
