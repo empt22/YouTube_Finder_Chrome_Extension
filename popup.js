@@ -1,5 +1,5 @@
 console.clear
-console.log('This is a popup from EL - 20241209!')
+console.log('This is a popup from EL - 20241210!')
 
 console.log("comment outside searchWord function :)") /* does print */
 
@@ -80,22 +80,77 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // if clicked, send current url and all content
     sendInputButton.addEventListener('click', function() {
-        // website URL, text content 
-        const currentUrl = window.location.href;
-        const pageContent = document.body.textContent;
+        chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
 
-        // Send the data to the Flask app
-        sendDataToFlask(currentUrl, pageContent)
-            .then(response => {
-                //resultElement.textContent = "Data sent successfully!";
-                resultElement.textContent = `Output: ${response.result}`;
-            })
-            .catch(error => {
-                resultElement.textContent = "Error: " + error;
+            /*
+            chrome.tabs.sendMessage(tabs[0].id, {action: "getPageData"}, (response)=> {
+                if (chrome.runtime.lastError){
+                    resultElement.textContent = "error page results";
+                    return ;
+                }
+            */
+                // in jecting script
+                chrome.scripting.executeScript( ///)
+                    {
+                        target: {tabId: tabs[0].id},
+                        func: ()=>{
+                            return {
+                                url: window.location.href,
+                                content: document.body.innerText || '',
+                            };
+                        },
+                    },
+                    (injectedResults)=>{  //} closing bracket after sned data to flask
+                        if (chrome.runtime.lastError){
+                            console.error(chrome.runtime.lastError.message);
+                            resultElement.textContent = 'page data error' ;
+                            return ; 
+                        }
+
+                    // retreiving data from injection resutls
+                    const pageData = injectedResults[0].result ; 
+                    const{url, content} = pageData ; 
+
+                    //const url = pageData[0];
+                    //const content = pageData[1];
+
+                    // website URL, text content  -- this doesn't work, gives popup html instead
+                    const currentUrl = window.location.href;
+                    const pageContent = document.body.textContent;
+
+                    // showing actual URL and content
+                    console.log('current URL', url) ;
+                    console.log('pageContent', content.substring(0,200) ) ;
+
+
+                    //const {url, content} = response ; 
+                            
+                    // Send the data to the Flask app
+                    sendDataToFlask( url, content) //url, content )//currentUrl, pageContent)
+                    .then(python_response => {
+                        if (python_response.result) {
+                            const{ url, is_youtube } = python_response.result ; 
+                            resultElement.textContent = `Output URL: ${url}\n HasYoutube: ${is_youtube}`;
+
+                        } else {
+                            resultElement.textContent = "error: missing " ;
+                        }
+
+
+                        //resultElement.textContent = "Data sent successfully!";
+                        //resultElement.textContent = `Output: ${response.result}`;
+                    })
+                    .catch(error => {
+                        resultElement.textContent = "Error: " + error;
+                    });
+                });// end of execute script
             });
+        });  
+    //});
+
     });
 
-});
+//});
 
 function fetchHelloWorld() {
     return fetch('https://evening-wave-25134-21052b612e3a.herokuapp.com/hello')  
