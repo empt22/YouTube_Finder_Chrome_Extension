@@ -87,7 +87,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Send the data to the Flask app
         sendDataToFlask(currentUrl, pageContent)
             .then(response => {
-                resultElement.textContent = "Data sent successfully!";
+                //resultElement.textContent = "Data sent successfully!";
+                resultElement.textContent = `Output: ${response.result}`;
             })
             .catch(error => {
                 resultElement.textContent = "Error: " + error;
@@ -105,8 +106,10 @@ function fetchHelloWorld() {
 }
 
 // when button clicked, send to app
+
+/*
 function sendDataToFlask(url, content) {
-    return fetch('https://evening-wave-25134-21052b612e3a.herokuapp.com/hello', {  
+    return fetch('https://evening-wave-25134-21052b612e3a.herokuapp.com/send-data', {  
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -119,4 +122,31 @@ function sendDataToFlask(url, content) {
     });
 }
 
+*/
 
+// sends data to flask and waits for response
+// asynchronous because it has to wait for results
+async function sendDataToFlask(url, content) {
+    try {
+        const response = await fetch('https://evening-wave-25134-21052b612e3a.herokuapp.com/send-data', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({url: url, content: content}),
+        });
+
+        if(!response.ok){
+            throw new Error(`error : ${response.status}`) ;
+        }
+
+        const flaskdata = await response.json();
+        return flaskdata ;
+    } catch (error){
+        console.error("error in sending/receiving Flask data", error);
+        throw error ; 
+
+
+    }
+
+}
