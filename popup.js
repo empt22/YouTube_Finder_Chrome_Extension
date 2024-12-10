@@ -129,8 +129,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     sendDataToFlask( url, content) //url, content )//currentUrl, pageContent)
                     .then(python_response => {
                         if (python_response.result) {
-                            const{ url, is_youtube } = python_response.result ; 
-                            resultElement.textContent = `Output URL: ${url}\n HasYoutube: ${is_youtube}`;
+                            const{ url, is_youtube, word_output } = python_response.result ; 
+                            resultElement.textContent = `Output URL: ${url}\n HasYoutube: ${is_youtube}\n Links: ${word_output}`;
 
                         } else {
                             resultElement.textContent = "error: missing " ;
