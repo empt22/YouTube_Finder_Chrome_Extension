@@ -131,6 +131,19 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (python_response.result) {
                             const{ url, is_youtube, word_output } = python_response.result ; 
                             resultElement.textContent = `Output URL: ${url}\n HasYoutube: ${is_youtube}\n Links: ${word_output}`;
+                            
+                            // disply a link
+                            const YT_url = "https://www.youtube.com/watch?v=I2dHYSbH0a4" ;
+                            const YT_linkDesc = "Video: https://www.youtube.com/watch?v=I2dHYSbH0a4" ;
+
+                            const link = document.createElement('a')
+                            link.href = YT_url ;
+                            link.textContent = YT_linkDesc ;
+                            link.target = "_blank" // to open in new tab when clicked
+                            
+                            const contatiner = document.getElementById('youtube-link');
+                            contatiner.appendChild(link) ;
+
 
                         } else {
                             resultElement.textContent = "error: missing " ;
