@@ -129,12 +129,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     sendDataToFlask( url, content) //url, content )//currentUrl, pageContent)
                     .then(python_response => {
                         if (python_response.result) {
-                            const{ url, is_youtube, word_output } = python_response.result ; 
+                            const{ url, is_youtube, word_output, n1_video_id, n1_video_title, n2_video_id, n2_video_title, n3_video_id, n3_video_title } = python_response.result ; 
                             resultElement.textContent = `Output URL: ${url}\n HasYoutube: ${is_youtube}\n Links: ${word_output}`;
                             
-                            // disply a link
-                            const YT_url = "https://www.youtube.com/watch?v=I2dHYSbH0a4" ;
-                            const YT_linkDesc = "Video: https://www.youtube.com/watch?v=I2dHYSbH0a4" ;
+                            // first Link disply a link
+                            const YT_url = "https://www.youtube.com/watch?v="+`${n1_video_id}` ;
+                            //const YT_linkDesc = "https://www.youtube.com/watch?v="+`${n1_video_id}` ;
+                            const YT_linkDesc = `${n1_video_title}`; //"Video: https://www.youtube.com/watch?v=I2dHYSbH0a4" ;
 
                             const link = document.createElement('a')
                             link.href = YT_url ;
@@ -143,6 +144,36 @@ document.addEventListener('DOMContentLoaded', function() {
                             
                             const contatiner = document.getElementById('youtube-link');
                             contatiner.appendChild(link) ;
+
+                            
+                            // 2nd Link disply a link
+                            const YT_url_2 = "https://www.youtube.com/watch?v="+`${n2_video_id}` ;
+                            const YT_linkDesc_2 = `${n2_video_title}` ;
+                            //const YT_linkDesc = `Output URL: ${n1_video_title}`; //"Video: https://www.youtube.com/watch?v=I2dHYSbH0a4" ;
+
+                            const link_2 = document.createElement('a')
+                            link_2.href = YT_url_2 ;
+                            link_2.textContent = YT_linkDesc_2 ;
+                            link_2.target = "_blank" // to open in new tab when clicked
+                            
+                            const contatiner_2 = document.getElementById('youtube-link2');
+                            contatiner_2.appendChild(link_2) ;
+
+
+                            // 3rd Link disply a link
+                            const YT_url_3 = "https://www.youtube.com/watch?v="+`${n3_video_id}` ;
+                            const YT_linkDesc_3 = `${n3_video_title}` ;
+                            //const YT_linkDesc = `Output URL: ${n1_video_title}`; //"Video: https://www.youtube.com/watch?v=I2dHYSbH0a4" ;
+
+                            const link_3 = document.createElement('a')
+                            link_3.href = YT_url_3 ;
+                            link_3.textContent = YT_linkDesc_3 ;
+                            link_3.target = "_blank" // to open in new tab when clicked
+                            
+                            const contatiner_3 = document.getElementById('youtube-link3');
+                            contatiner_3.appendChild(link_3) ;
+
+
 
 
                         } else {
