@@ -20,15 +20,15 @@ This Chrome extension helps you find YouTube videos from pre-selected channels (
 Once installed, you go to a tab you find interesting. Then click the purple smiley face icon in your Chrome extensions. Then press the "Go" button, and 3 links to the top videos from the custom library will appear. You can click them and they will open in a new tab. You can view transcripts in Youtube to see if it looks like a good match
 
 ### Requirements for Python in Heroku
-Flask==3.0.3
-gunicorn==23.0.0
-flask-cors==5.0.0
-boto3==1.35.77
-rank-bm25==0.2.2
-pandas==2.2.3
-youtube-transcript-api==0.6.3
-google-api-python-client==2.100.0
-requests==2.32.3
+* Flask==3.0.3
+* gunicorn==23.0.0
+* flask-cors==5.0.0
+* boto3==1.35.77
+* rank-bm25==0.2.2
+* pandas==2.2.3
+* youtube-transcript-api==0.6.3
+* google-api-python-client==2.100.0
+* requests==2.32.3
 
 Flask and gunicorn were to work with Heroku, boto3 for the AWS S3 bucket. The rank-bm25 and pandas were used in Python to rank the videos and keep a dataframe of info. The YouTube libraries didn't work in Heroku but were used locally to set up the video library. The "requests" library is not currently used but for future development once getting special Google Authorization to access Youtube videos through Heroku.
 
@@ -60,22 +60,24 @@ Another result was searching "giraffes" in google, which brings up a bunch of "L
 There were also some poor results that did not seem intuitive, which might relate to the Javascript including even ads and unrelated contents, and the app does not do any data cleaning. Also, longer videos seemed to be favored in search results, so fine-tuning the TF-IDF in BM25 to penalize longer docs may have helped.
 
 ## Cited Code Sources
-https://skillshats.com/blogs/how-to-use-the-youtube-api-with-python-a-step-by-step-guide/
-https://medium.com/@luv_uiux/your-first-chrome-extension-hello-world-0f6898791489
-https://stackoverflow.com/questions/74409759/chrome-extension-that-searches-for-text-in-a-page-then-changes-the-message-on-th
-https://www.scaler.com/topics/javascript-return-multiple-values/
-https://stackoverflow.com/questions/54511144/print-set-element-in-javascript
-https://stackoverflow.com/questions/3787901/why-javascripts-typeof-always-return-object
-https://developer.chrome.com/docs/extensions/develop/concepts/messaging
-https://developers.google.com/youtube/v3/docs/channels/list
-https://developers.google.com/youtube/v3/quickstart/js
-https://medium.com/@cmurphy580/a-quick-walkthrough-of-the-youtube-api-javascript-4f0b0a13f988
-https://www.geeksforgeeks.org/introduction-and-installation-of-heroku-cli-on-windows-machine/
-https://devcenter.heroku.com/articles/getting-started-with-python#clone-the-sample-app
-https://www.geeksforgeeks.org/deploy-python-flask-app-on-heroku/
-https://whoosh.readthedocs.io/en/latest/indexing.html#merging-segments
-https://dev.to/aws-builders/how-to-list-contents-of-s3-bucket-using-boto3-python-47mm
-https://stackoverflow.com/questions/18500759/createelement-a-href-variable1variable2-a
-https://coreui.io/blog/how-to-open-all-links-in-new-tab-using-javascript/
-https://stackoverflow.com/questions/65566850/what-permissions-are-needed-to-delete-an-object-from-a-specific-bucket-in-s3
+These are all sources I used for for help with coding and specific code segments that are incorporated into the final version.
+
+* https://skillshats.com/blogs/how-to-use-the-youtube-api-with-python-a-step-by-step-guide/
+* https://medium.com/@luv_uiux/your-first-chrome-extension-hello-world-0f6898791489
+* https://stackoverflow.com/questions/74409759/chrome-extension-that-searches-for-text-in-a-page-then-changes-the-message-on-th
+* https://www.scaler.com/topics/javascript-return-multiple-values/
+* https://stackoverflow.com/questions/54511144/print-set-element-in-javascript
+* https://stackoverflow.com/questions/3787901/why-javascripts-typeof-always-return-object
+* https://developer.chrome.com/docs/extensions/develop/concepts/messaging
+* https://developers.google.com/youtube/v3/docs/channels/list
+* https://developers.google.com/youtube/v3/quickstart/js
+* https://medium.com/@cmurphy580/a-quick-walkthrough-of-the-youtube-api-javascript-4f0b0a13f988
+* https://www.geeksforgeeks.org/introduction-and-installation-of-heroku-cli-on-windows-machine/
+* https://devcenter.heroku.com/articles/getting-started-with-python#clone-the-sample-app
+* https://www.geeksforgeeks.org/deploy-python-flask-app-on-heroku/
+* https://whoosh.readthedocs.io/en/latest/indexing.html#merging-segments
+* https://dev.to/aws-builders/how-to-list-contents-of-s3-bucket-using-boto3-python-47mm
+* https://stackoverflow.com/questions/18500759/createelement-a-href-variable1variable2-a
+* https://coreui.io/blog/how-to-open-all-links-in-new-tab-using-javascript/
+* https://stackoverflow.com/questions/65566850/what-permissions-are-needed-to-delete-an-object-from-a-specific-bucket-in-s3
 
