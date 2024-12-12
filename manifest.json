@@ -1,0 +1,18 @@
+{
+    "manifest_version": 3,
+    "name": "YouTube Finder",
+    "description": "Base Level Extension",
+    "version": "1.0",
+    "permissions": [
+        "scripting", "activeTab"
+    ],
+    "host_permissions":[
+        "<all_urls>"
+    ],
+    "action": {
+        "default_popup": "display_window.html",
+        "default_icon": "chrome_ext_logo.png"
+    }
+}
+
+

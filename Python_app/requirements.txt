@@ -1,0 +1,9 @@
+Flask==3.0.3
+gunicorn==23.0.0
+flask-cors==5.0.0
+boto3==1.35.77
+rank-bm25==0.2.2
+pandas==2.2.3
+youtube-transcript-api==0.6.3
+google-api-python-client==2.100.0
+requests==2.32.3
