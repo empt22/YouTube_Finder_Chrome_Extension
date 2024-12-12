@@ -19,6 +19,11 @@ This Chrome extension helps you find YouTube videos from pre-selected channels (
 ### How to use
 Once installed, you go to a tab you find interesting. Then click the purple smiley face icon in your Chrome extensions. Then press the "Go" button, and 3 links to the top videos from the custom library will appear. You can click them and they will open in a new tab. You can view transcripts in Youtube to see if it looks like a good match
 
+YouTube Channels included below, "all_youtube_videos.txt" lists all titles:
+* naturepbs - nature documentaries
+* KQEDDeepLook - nature and science
+* bonappetit - food, cooking
+
 ### Requirements for Python in Heroku
 * Flask==3.0.3
 * gunicorn==23.0.0
@@ -34,6 +39,7 @@ Flask and gunicorn were to work with Heroku, boto3 for the AWS S3 bucket. The ra
 
 ### Files included:
 * manually_save_videos_for_S3_bucket.py : not part of chrome extension, just a one-time set up to create the 32 Youtube video transcript files
+* all_youtube_videos.txt : also not in use, just showing video titles for reference
 * Python_app : folder for Heroku Flask to run Python
   * app : folder with Python code
     * main.py : Python code to perform bm25
@@ -45,6 +51,7 @@ Flask and gunicorn were to work with Heroku, boto3 for the AWS S3 bucket. The ra
 * manifest.json : setting up chrome extension
 * display_window.html : formatting popup window
 * popup.js : for the button that calls the Flask endpoint
+* 
 
 ### Limitations
 I did not meet all the goals I planned. Two main shortcomings:
